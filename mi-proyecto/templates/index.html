@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Muro del Foro</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Muro de la Comunidad</h1>
+            <p>Conectado como: <strong>{{ usuario }}</strong> | <a href="/logout">Cerrar sesión</a></p>
+        </header>
+
+        <section class="publicar-mensaje">
+            <form action="/publicar" method="POST">
+                <textarea name="mensaje" placeholder="¿Qué quieres compartir hoy?" required></textarea>
+                <button type="submit">Publicar en el muro</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <section class="muro">
+            <h3>Mensajes recientes</h3>
+            {% if mensajes %}
+                {% for m in mensajes %}
+                    <div class="mensaje-card">
+                        <span class="autor">@{{ m.usuario }}</span>
+                        <p class="texto">{{ m.texto }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aún no hay mensajes. ¡Sé el primero en escribir!</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
