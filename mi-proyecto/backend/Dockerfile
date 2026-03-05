@@ -1,18 +1,18 @@
-# Usa una imagen ligera de Node
-FROM node:18-alpine
+# Usamos una versión ligera de Node.js
+FROM node:18
 
-# Crea el directorio de trabajo
+# Creamos la carpeta de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos de dependencias y las instala
-COPY package*.json ./
+# Copiamos los archivos de configuración y descargamos las dependencias (Express, etc.)
+COPY package.json ./
 RUN npm install
 
-# Copia el resto del código
+# Copiamos el resto de nuestro código
 COPY . .
 
-# Expone el puerto que usa tu app
+# Exponemos el puerto 3000 (el que pedía el profe)
 EXPOSE 3000
 
-# Comando para arrancar la app
-CMD ["node", "app.js"]
+# Comando para arrancar el servidor
+CMD ["node", "server.js"]
